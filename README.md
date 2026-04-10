@@ -229,7 +229,7 @@ The supervisor acts as:
 
 ---
 
-## 📝 Notes
+##  Notes
 
 * All outputs captured from a Linux VM environment
 * Kernel module successfully loads and initializes
@@ -237,7 +237,7 @@ The supervisor acts as:
 
 ---
 
-## ✅ Conclusion
+##  Conclusion
 
 This project demonstrates a simplified container runtime that integrates:
 
