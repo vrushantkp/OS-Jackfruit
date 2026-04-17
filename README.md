@@ -97,51 +97,38 @@ sudo ./engine stop beta
 ##  Demo with Screenshots
 
 ### 1. Build Process
-
-Compilation of the runtime and kernel module.
 ![Build](build.png)
 
 ---
 
 ### 2. Supervisor Execution
-
-Supervisor initializing and managing containers.
 ![Supervisor](supervisor.png)
 
 ---
 
 ### 3. Multi-Container Execution
-
-Running multiple containers (alpha & beta).
 ![Containers](containers.png)
 
 ---
 
 ### 4. Container Metadata (PS Output)
-
-Displays container ID, PID, and state.
 ![PS](ps.png)
 
 ---
 
 ### 5. Logging System
-
-Per-container logs being generated.
 ![Logs](logs.png)
 
 ---
 
 ### 6. Kernel Module Output
-
-Kernel module successfully loaded and messages observed via dmesg.
 ![Kernel](dmseg.png)
 
 ---
 
 ### 7. CPU Scheduling Behavior
-
-CPU-bound process visible using `top`.
 ![Top](top.png)
+
 
 ---
 
