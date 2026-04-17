@@ -9,7 +9,7 @@
 
 ## 🔹 Overview
 
-This project implements a lightweight container runtime in C using Linux system primitives. It demonstrates core OS concepts such as process isolation, scheduling, logging, and kernel interaction.
+This project implements a lightweight container runtime in C using Linux system primitives. It demonstrates core operating system concepts such as process isolation, scheduling, logging, and kernel interaction.
 
 ### 🔧 Key Features
 
@@ -18,7 +18,7 @@ This project implements a lightweight container runtime in C using Linux system 
 * Per-container logging system
 * Kernel-level monitoring using a Loadable Kernel Module (LKM)
 * CPU vs I/O scheduling demonstration
-* Clean lifecycle management (no zombie processes)
+* Clean lifecycle management
 
 ---
 
@@ -94,61 +94,54 @@ sudo ./engine stop beta
 
 ---
 
-## 📸 Demo with Screenshots
+##  Demo with Screenshots
 
 ### 1. Build Process
 
-Compilation of all components.
-![Build](images/build.png)
+Compilation of the runtime and kernel module.
+![Build](build.png)
 
 ---
 
 ### 2. Supervisor Execution
 
-Supervisor starting and managing containers.
-![Supervisor](images/supervisor.png)
+Supervisor initializing and managing containers.
+![Supervisor](supervisor.png)
 
 ---
 
 ### 3. Multi-Container Execution
 
 Running multiple containers (alpha & beta).
-![Containers](images/containers.png)
+![Containers](containers.png)
 
 ---
 
 ### 4. Container Metadata (PS Output)
 
 Displays container ID, PID, and state.
-![PS](images/ps.png)
+![PS](ps.png)
 
 ---
 
 ### 5. Logging System
 
-Logs generated per container.
-![Logs](images/logs.png)
+Per-container logs being generated.
+![Logs](logs.png)
 
 ---
 
-### 6. Kernel Monitoring
+### 6. Kernel Module Output
 
-Kernel module loaded successfully.
-![Kernel](images/dmesg.png)
+Kernel module successfully loaded and messages observed via dmesg.
+![Kernel](dmseg.png)
 
 ---
 
 ### 7. CPU Scheduling Behavior
 
-CPU-bound process visible in `top`.
-![Top](images/top.png)
-
----
-
-### 8. Clean Teardown (No Zombies)
-
-No defunct processes after execution.
-![Zombies](images/zombies.png)
+CPU-bound process visible using `top`.
+![Top](top.png)
 
 ---
 
@@ -156,41 +149,41 @@ No defunct processes after execution.
 
 ### 🔹 Process Isolation
 
-* Containers run using Linux namespaces
-* Separate execution environments
-* Isolated filesystem and processes
+* Containers use Linux namespaces
+* Separate process trees and environments
+* Isolated execution
 
 ---
 
 ### 🔹 Supervisor Design
 
-* Controls container lifecycle
-* Handles process creation and termination
+* Central controller for container lifecycle
+* Handles creation and termination
 * Coordinates logging
 
 ---
 
 ### 🔹 Logging System
 
-* Each container logs to its own file
-* Pipe-based output redirection
-* Persistent logs
+* Each container logs independently
+* File-based logging
+* Persistent output after execution
 
 ---
 
 ### 🔹 Kernel Monitoring
 
 * Implemented using LKM
-* Demonstrates kernel-user communication
-* Tracks container-level activity
+* Demonstrates kernel-user interaction
+* Tracks container-related activity
 
 ---
 
 ### 🔹 Scheduling Behavior
 
-* CPU-bound processes consume high CPU
+* CPU-bound processes use high CPU
 * I/O-bound processes yield CPU
-* Shows Linux scheduler behavior
+* Demonstrates Linux scheduler
 
 ---
 
@@ -199,22 +192,22 @@ No defunct processes after execution.
 ### Container Isolation
 
 * Namespace-based approach
-* Lightweight but less secure than full containers
+* Lightweight but less secure than full container runtimes
 
 ### Supervisor
 
 * Single controller process
-* Simple but single point of failure
+* Easy to manage but single point of failure
 
 ### Logging
 
 * File-based logs
-* Easy to implement, less scalable
+* Simple but limited scalability
 
 ### Kernel Monitoring
 
-* LKM-based design
-* Powerful but adds complexity
+* LKM-based tracking
+* Powerful but increases complexity
 
 ---
 
@@ -222,25 +215,25 @@ No defunct processes after execution.
 
 * CPU-intensive tasks dominate CPU usage
 * Logging works consistently
-* No zombie processes observed
-* Containers execute and terminate correctly
+* Containers start and stop correctly
+* Kernel module loads successfully
 
 ---
 
 ## 🔹 Notes
 
-* All screenshots captured from VM
-* Some binaries may not execute inside rootfs but system flow remains valid
+* Screenshots captured from a Linux VM
+* Some container commands may exit quickly depending on workload
 
 ---
 
 ## 🔹 Conclusion
 
-This project demonstrates a functional container runtime integrating:
+This project demonstrates a simplified container runtime integrating:
 
 * Process isolation
 * Logging pipeline
 * Kernel interaction
 * Scheduling behavior
 
-It provides hands-on insight into core operating system concepts.
+It provides practical insight into core operating system concepts.
