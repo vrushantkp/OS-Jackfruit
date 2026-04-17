@@ -9,11 +9,11 @@
 
 ## 🔹 Overview
 
-This project implements a lightweight container runtime in C using Linux system primitives. It demonstrates core operating system concepts such as process isolation, scheduling, logging, and kernel interaction.
+This project implements a lightweight container runtime in C using Linux system primitives. It demonstrates key operating system concepts such as process isolation, scheduling, logging, and kernel interaction in a practical environment.
 
-### 🔧 Key Features
+###  Key Features
 
-* Multi-container execution using namespaces
+* Multi-container execution using Linux namespaces
 * Centralized supervisor process
 * Per-container logging system
 * Kernel-level monitoring using a Loadable Kernel Module (LKM)
@@ -94,41 +94,54 @@ sudo ./engine stop beta
 
 ---
 
-##  Demo with Screenshots
+## 📸 Demo with Screenshots
 
 ### 1. Build Process
-![TEST](./images/build.png)
+
+Compilation of runtime and kernel module.
+![Build](./images/build.png)
 
 ---
 
 ### 2. Supervisor Execution
-![Supervisor](supervisor.png)
+
+Supervisor initializing and managing containers.
+![Supervisor](./images/supervisor.png)
 
 ---
 
 ### 3. Multi-Container Execution
-![Containers](containers.png)
+
+Running multiple containers (alpha & beta).
+![Containers](./images/containers.png)
 
 ---
 
 ### 4. Container Metadata (PS Output)
-![PS](ps.png)
+
+Displays container ID, PID, and state.
+![PS](./images/ps.png)
 
 ---
 
 ### 5. Logging System
-![Logs](logs.png)
+
+Per-container logs being generated and stored.
+![Logs](./images/logs.png)
 
 ---
 
 ### 6. Kernel Module Output
-![Kernel](dmseg.png)
+
+Kernel module successfully loaded and verified using dmesg.
+![Kernel](./images/dmseg.png)
 
 ---
 
 ### 7. CPU Scheduling Behavior
-![Top](top.png)
 
+CPU-bound process observed using `top`.
+![Top](./images/top.png)
 
 ---
 
@@ -137,30 +150,30 @@ sudo ./engine stop beta
 ### 🔹 Process Isolation
 
 * Containers use Linux namespaces
-* Separate process trees and environments
-* Isolated execution
+* Independent process trees
+* Isolated execution environments
 
 ---
 
 ### 🔹 Supervisor Design
 
 * Central controller for container lifecycle
-* Handles creation and termination
-* Coordinates logging
+* Manages process creation and termination
+* Coordinates logging and execution
 
 ---
 
 ### 🔹 Logging System
 
-* Each container logs independently
-* File-based logging
-* Persistent output after execution
+* Each container writes to its own log file
+* Output captured using pipes
+* Logs persist after container termination
 
 ---
 
 ### 🔹 Kernel Monitoring
 
-* Implemented using LKM
+* Implemented as a Loadable Kernel Module (LKM)
 * Demonstrates kernel-user interaction
 * Tracks container-related activity
 
@@ -168,9 +181,9 @@ sudo ./engine stop beta
 
 ### 🔹 Scheduling Behavior
 
-* CPU-bound processes use high CPU
-* I/O-bound processes yield CPU
-* Demonstrates Linux scheduler
+* CPU-bound processes utilize high CPU
+* I/O-bound processes yield CPU frequently
+* Demonstrates Linux scheduling behavior
 
 ---
 
@@ -178,30 +191,30 @@ sudo ./engine stop beta
 
 ### Container Isolation
 
-* Namespace-based approach
-* Lightweight but less secure than full container runtimes
+* **Approach:** Namespace-based
+* **Tradeoff:** Lightweight but less secure than full container runtimes
 
 ### Supervisor
 
-* Single controller process
-* Easy to manage but single point of failure
+* **Approach:** Single controller process
+* **Tradeoff:** Easy to manage but introduces a single point of failure
 
 ### Logging
 
-* File-based logs
-* Simple but limited scalability
+* **Approach:** File-based logging
+* **Tradeoff:** Simple but not highly scalable
 
 ### Kernel Monitoring
 
-* LKM-based tracking
-* Powerful but increases complexity
+* **Approach:** LKM-based tracking
+* **Tradeoff:** Powerful but increases system complexity
 
 ---
 
 ## 🔹 Observations
 
-* CPU-intensive tasks dominate CPU usage
-* Logging works consistently
+* CPU-intensive processes dominate CPU usage
+* Logging system works consistently
 * Containers start and stop correctly
 * Kernel module loads successfully
 
@@ -209,18 +222,18 @@ sudo ./engine stop beta
 
 ## 🔹 Notes
 
-* Screenshots captured from a Linux VM
-* Some container commands may exit quickly depending on workload
+* All screenshots captured from a Linux VM environment
+* Some containers may exit quickly depending on workload
 
 ---
 
 ## 🔹 Conclusion
 
-This project demonstrates a simplified container runtime integrating:
+This project demonstrates a functional container runtime integrating:
 
 * Process isolation
 * Logging pipeline
 * Kernel interaction
 * Scheduling behavior
 
-It provides practical insight into core operating system concepts.
+It provides practical insight into how operating systems manage processes, resources, and execution environments.
