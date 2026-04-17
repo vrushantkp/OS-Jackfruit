@@ -1,4 +1,4 @@
-# Multi-Container Runtime
+# Multi-Container Runtime 
 
 ## 🔹 Team Information
 
@@ -9,15 +9,15 @@
 
 ## 🔹 Overview
 
-This project implements a lightweight container runtime in C, inspired by core Linux container principles. It demonstrates how operating system concepts like process isolation, scheduling, and kernel interaction work together in a practical system.
+This project implements a lightweight container runtime in C using Linux system primitives. It demonstrates core OS concepts such as process isolation, scheduling, logging, and kernel interaction.
 
 ### 🔧 Key Features
 
-* Multi-container execution using Linux namespaces
+* Multi-container execution using namespaces
 * Centralized supervisor process
 * Per-container logging system
 * Kernel-level monitoring using a Loadable Kernel Module (LKM)
-* CPU vs I/O scheduling experiments
+* CPU vs I/O scheduling demonstration
 * Clean lifecycle management (no zombie processes)
 
 ---
@@ -50,7 +50,7 @@ sudo ./engine supervisor ./rootfs-base
 
 ---
 
-### 4. Prepare Container Root Filesystems
+### 4. Prepare Containers
 
 ```bash
 cp -a ./rootfs-base ./rootfs-alpha
@@ -96,51 +96,59 @@ sudo ./engine stop beta
 
 ## 📸 Demo with Screenshots
 
-### 1. Multi-Container Supervision
+### 1. Build Process
 
-Shows the supervisor launching and managing multiple containers.
+Compilation of all components.
+![Build](images/build.png)
 
+---
+
+### 2. Supervisor Execution
+
+Supervisor starting and managing containers.
 ![Supervisor](images/supervisor.png)
 
 ---
 
-### 2. Container Metadata (CLI)
+### 3. Multi-Container Execution
 
-Displays container ID, PID, and state.
-
-![PS Output](images/containers.png)
+Running multiple containers (alpha & beta).
+![Containers](images/containers.png)
 
 ---
 
-### 3. Logging System
+### 4. Container Metadata (PS Output)
 
-Each container generates logs stored separately.
+Displays container ID, PID, and state.
+![PS](images/ps.png)
 
+---
+
+### 5. Logging System
+
+Logs generated per container.
 ![Logs](images/logs.png)
 
 ---
 
-### 4. Kernel Monitoring
+### 6. Kernel Monitoring
 
-Kernel module successfully loaded and device initialized.
-
-![Kernel Monitor](images/dmesg.png)
+Kernel module loaded successfully.
+![Kernel](images/dmesg.png)
 
 ---
 
-### 5. Scheduling Behavior (CPU vs IO)
+### 7. CPU Scheduling Behavior
 
-CPU-bound tasks consume higher CPU compared to I/O-bound tasks.
-
+CPU-bound process visible in `top`.
 ![Top](images/top.png)
 
 ---
 
-### 6. Clean Teardown (No Zombies)
+### 8. Clean Teardown (No Zombies)
 
-System ensures no zombie processes remain.
-
-![No Zombies](images/zombies.png)
+No defunct processes after execution.
+![Zombies](images/zombies.png)
 
 ---
 
@@ -148,45 +156,41 @@ System ensures no zombie processes remain.
 
 ### 🔹 Process Isolation
 
-Containers are created using Linux namespaces:
-
-* Separate process trees
-* Isolated filesystem environments
-* Independent execution contexts
+* Containers run using Linux namespaces
+* Separate execution environments
+* Isolated filesystem and processes
 
 ---
 
 ### 🔹 Supervisor Design
 
-The supervisor acts as:
-
-* A central controller for container lifecycle
-* A process manager for spawning and stopping containers
-* A coordinator for logging and monitoring
+* Controls container lifecycle
+* Handles process creation and termination
+* Coordinates logging
 
 ---
 
 ### 🔹 Logging System
 
-* Each container writes to its own log file
-* Output is captured via pipes
-* Logs persist even after container termination
+* Each container logs to its own file
+* Pipe-based output redirection
+* Persistent logs
 
 ---
 
 ### 🔹 Kernel Monitoring
 
-* Implemented as a Loadable Kernel Module
-* Interacts with user-space runtime
+* Implemented using LKM
 * Demonstrates kernel-user communication
+* Tracks container-level activity
 
 ---
 
 ### 🔹 Scheduling Behavior
 
-* CPU-bound processes utilize maximum CPU
-* I/O-bound processes frequently yield CPU
-* Demonstrates real-world Linux scheduling behavior
+* CPU-bound processes consume high CPU
+* I/O-bound processes yield CPU
+* Shows Linux scheduler behavior
 
 ---
 
@@ -194,56 +198,49 @@ The supervisor acts as:
 
 ### Container Isolation
 
-* **Approach:** Namespace-based
-* **Tradeoff:** Lightweight but less secure than full container runtimes
+* Namespace-based approach
+* Lightweight but less secure than full containers
 
 ### Supervisor
 
-* **Approach:** Single process controller
-* **Tradeoff:** Simple design but single point of failure
+* Single controller process
+* Simple but single point of failure
 
 ### Logging
 
-* **Approach:** File-based logging
-* **Tradeoff:** Easy implementation, limited scalability
+* File-based logs
+* Easy to implement, less scalable
 
 ### Kernel Monitoring
 
-* **Approach:** LKM-based tracking
-* **Tradeoff:** Powerful but increases complexity
+* LKM-based design
+* Powerful but adds complexity
 
 ---
 
 ## 🔹 Observations
 
-### CPU vs IO
-
-* `cpu_hog` consumes significantly higher CPU
-* `io_pulse` uses minimal CPU
-
-### System Behavior
-
-* Containers execute and terminate cleanly
-* Logs are consistently generated
+* CPU-intensive tasks dominate CPU usage
+* Logging works consistently
 * No zombie processes observed
+* Containers execute and terminate correctly
 
 ---
 
-##  Notes
+## 🔹 Notes
 
-* All outputs captured from a Linux VM environment
-* Kernel module successfully loads and initializes
-* Some container commands may exit quickly, but system behavior remains consistent
+* All screenshots captured from VM
+* Some binaries may not execute inside rootfs but system flow remains valid
 
 ---
 
-##  Conclusion
+## 🔹 Conclusion
 
-This project demonstrates a simplified container runtime that integrates:
+This project demonstrates a functional container runtime integrating:
 
 * Process isolation
 * Logging pipeline
 * Kernel interaction
 * Scheduling behavior
 
-It provides a strong practical understanding of how operating systems manage processes, resources, and execution environments.
+It provides hands-on insight into core operating system concepts.
