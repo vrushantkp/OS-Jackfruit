@@ -97,7 +97,7 @@ sudo ./engine stop beta
 ##  Demo with Screenshots
 
 ### 1. Build Process
-![Build](build.png)
+![TEST](./images/build.png)
 
 ---
 
